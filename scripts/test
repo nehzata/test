@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+name="$(basename $0)"
+dir="$(dirname "$0")/.."
+(go build -trimpath -buildvcs=false -ldflags="-s -w -buildid=" -o "${TMPDIR:-/tmp}/$name" .) && exec "${TMPDIR:-/tmp}/$name" "$@"
